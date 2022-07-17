@@ -18,7 +18,7 @@ namespace ShoppingList
                 {"Hot Dogs", 5.99m},
                 {"Buns", 2.90m},
                 {"Avocado", 2.65m},
-                {"Bananas", 1.50m},
+                {"Bananas", 1.00m},
             };
 
         public static void printStoreInventory()

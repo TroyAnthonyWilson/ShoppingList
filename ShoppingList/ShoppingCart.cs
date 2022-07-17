@@ -33,12 +33,13 @@ namespace ShoppingList
                 Console.Write($"{item,-12} {storeInventory[item]}");
                 if(storeInventory[item] == mostExpensive)
                 {
-                    Console.WriteLine("   Most expensive item");
+                    Console.Write("   Most expensive item");
                 }
                 else if(storeInventory[item] == leastExpensive)
                 {
-                    Console.WriteLine("   Least expensive item");
+                    Console.Write("   Least expensive item");
                 }
+                Console.WriteLine();
                 total += storeInventory[item];
             }
             Console.WriteLine($"\nCart total : {total}");
