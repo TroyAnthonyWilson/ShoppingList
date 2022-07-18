@@ -5,22 +5,26 @@ namespace ShoppingList
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             bool addMoreItems = true;
-            string[] yes = { "y" , "yes", ""};
+            string[] no = { "n" , "no"};
             do
             {
-                printStoreInventory();
-                //string mostExpensive = storeInventory.FirstOrDefault(x => x.Value == storeInventory.Values.Max()).Key;
-                //string leastExpensive = storeInventory.FirstOrDefault(x => x.Value == storeInventory.Values.Min()).Key;
-                //Console.WriteLine($"{mostExpensive} {storeInventory[mostExpensive]}");
-                //Console.WriteLine($"{leastExpensive} {storeInventory[leastExpensive]}");
+                PrintStoreInventory();
+
                 string add = Console.ReadLine();
 
                 if(storeInventory.ContainsKey(add))
                 {
-                    shoppingCart.Add(add);
+                    foreach(var kvp in storeInventory)
+                    {
+                        if(add == kvp.Key)
+                        {
+                            shoppingCart.Add(kvp.Key);                       
+                            break;
+                        }
+                    }
                 }
                 else if(int.TryParse(add, out int index) && index -1  < storeInventory.Count)
                 {
@@ -29,13 +33,13 @@ namespace ShoppingList
                 else
                 {
                     Console.WriteLine("Sorry we don't have that item.");
-                    Console.WriteLine("Press any key to continue.");
+                    Console.Write("Press any key to continue.");
                     Console.ReadKey();
                     continue;
                 }
                 printShoppingCart();
-                Console.WriteLine("Would you like to add more items Y/N?");
-                if(!yes.Contains(Console.ReadLine().ToLower().Trim()))
+                Console.Write("Would you like to add more items Y/N?");
+                if(no.Contains(Console.ReadLine().ToLower().Trim()))
                 {
                     addMoreItems = false;
                 }
@@ -43,7 +47,6 @@ namespace ShoppingList
 
             decimal total = printShoppingCart();
             Console.WriteLine($"Your total for today comes to {total}");
-
         }
     }
 }

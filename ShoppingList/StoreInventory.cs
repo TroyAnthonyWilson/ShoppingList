@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace ShoppingList
 {
     internal class StoreInventory
@@ -19,9 +14,11 @@ namespace ShoppingList
                 {"Buns", 2.90m},
                 {"Avocado", 2.65m},
                 {"Bananas", 1.00m},
+                {"Onions", 3.75m},
+                {"Donuts", 0.75m},
             };
 
-        public static void printStoreInventory()
+        public static void PrintStoreInventory()
         {
             Console.Clear();
             int itemNumber = 1;
@@ -31,8 +28,7 @@ namespace ShoppingList
                 Console.WriteLine($"{itemNumber}: {kvp.Key,-10} {kvp.Value}");
                 itemNumber++;
             }
-            Console.WriteLine("\nPlease select an item to add to your cart: ");
+            Console.Write("\nPlease select an item to add to your cart: ");
         }
-
     }
 }
