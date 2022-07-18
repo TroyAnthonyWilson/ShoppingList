@@ -38,7 +38,7 @@ namespace ShoppingList
                     continue;
                 }
                 printShoppingCart();
-                Console.Write("Would you like to add more items Y/N?");
+                Console.Write("Press any key to add more items or NO to exit");
                 if(no.Contains(Console.ReadLine().ToLower().Trim()))
                 {
                     addMoreItems = false;
