@@ -22,14 +22,16 @@ namespace ShoppingList
             decimal total = 0;
             int itemNumber = 1;
             Console.Clear();
-            Console.WriteLine("Shopping cart\n");
+            Console.WriteLine("Shopping cart");
+            Console.WriteLine("==================\n");
 
             shoppingCart.OrderBy(x => x.GetPrice)
                 .ToList()
                 .ForEach(i => Console.WriteLine($"{itemNumber++,-2}: {i.GetItem,-12}{i.GetPrice}"));
 
             total = shoppingCart.Sum(item => item.GetPrice);
-            Console.WriteLine($"\nCart total : {total}\n");
+            Console.WriteLine("\n=======================");
+            Console.WriteLine($"Cart total : {total}\n");
             return total;
         }
     }

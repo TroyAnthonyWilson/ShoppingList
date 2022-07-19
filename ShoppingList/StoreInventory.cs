@@ -3,7 +3,6 @@ namespace ShoppingList
 {
     internal class StoreInventory
     {
-
         public static Dictionary<string, decimal> storeInventory = new Dictionary<string, decimal>()
             {
                 {"Milk", 1.50m},
@@ -30,7 +29,6 @@ namespace ShoppingList
             {
                 Console.WriteLine($"{itemNumber++, -2}: {kvp.Key,-10} {kvp.Value}");
             }
-            Console.Write("\nPlease select an item to add to your cart: ");
         }
     }
 }

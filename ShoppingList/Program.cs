@@ -12,7 +12,7 @@ namespace ShoppingList
             do
             {
                 PrintStoreInventory();
-
+                Console.Write("\nPlease select an item to add to your cart: ");
                 string add = Console.ReadLine().ToLower().Trim();
 
                 if(storeInventory.Keys.Where(key => key.ToLower().StartsWith(add)).Any())
@@ -31,7 +31,7 @@ namespace ShoppingList
                     }
                     else
                     {
-                        Console.WriteLine("I couldn't find what you wanted");
+                        Console.WriteLine("Sorry I couldn't find what you wanted");
                         Console.Write("Press any key to continue.");
                         Console.ReadKey();
                         continue;
