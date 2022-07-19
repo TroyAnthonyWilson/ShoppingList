@@ -7,19 +7,17 @@ namespace ShoppingList
     {
         static void Main()
         {
-
+            bool addMore = true;
             string[] no = { "n", "no", "exit", "e", "checkout" };
-            string[] someKeys = { "B", "A" };
             do
             {
                 PrintStoreInventory();
 
-                string add = Console.ReadLine();
+                string add = Console.ReadLine().ToLower().Trim();
 
-                if(storeInventory.Keys.Where(key => key.StartsWith(add)).Any())
+                if(storeInventory.Keys.Where(key => key.ToLower().StartsWith(add)).Any())
                 {
-                    string[] position = storeInventory.Keys.Where(key => key.StartsWith(add)).ToArray();
-
+                    string[] position = storeInventory.Keys.Where(key => key.ToLower().StartsWith(add)).ToArray();
                     if(position.Length == 1)
                     {
                         foreach(var kvp in storeInventory)
@@ -34,6 +32,8 @@ namespace ShoppingList
                     else
                     {
                         Console.WriteLine("I couldn't find what you wanted");
+                        Console.Write("Press any key to continue.");
+                        Console.ReadKey();
                         continue;
                     }
                 }
@@ -54,7 +54,12 @@ namespace ShoppingList
 
                 Console.Write("Press any key to add more items or NO to checkout: ");
 
-            } while(!no.Contains(Console.ReadLine().ToLower().Trim()));
+                if(no.Contains(Console.ReadLine().ToLower().Trim()))
+                {
+                    addMore = false;
+                }
+
+            } while(addMore);
 
             Console.WriteLine($"Your total for today comes to {PrintShoppingCart()}");
         }
