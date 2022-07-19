@@ -1,6 +1,7 @@
 ﻿using static ShoppingList.StoreInventory;
 using static ShoppingList.ShoppingCart;
 using static ShoppingList.AddItem;
+using static System.Console;
 
 namespace ShoppingList
 {
@@ -9,23 +10,25 @@ namespace ShoppingList
         static void Main()
         {
             bool addMore = true;
+            decimal total = 0;
             string[] no = { "n", "no", "exit", "e", "checkout" };
+  
             do
             {
                 PrintStoreInventory();
                 if(AddItemToCart()) continue;
-                PrintShoppingCart();
+                total = PrintShoppingCart();
 
-                Console.Write("Press any key to add more items or NO to checkout: ");
+                Write("Press any key to add more items or NO to checkout: ");
 
-                if(no.Contains(Console.ReadLine().ToLower().Trim()))
+                if(no.Contains(ReadLine().ToLower().Trim()))
                 {
                     addMore = false;
                 }
 
             } while(addMore);
 
-            Console.WriteLine($"Your total for today comes to {PrintShoppingCart()}");
+            WriteLine($"Your total for today comes to {total}");
         }
     }
 }

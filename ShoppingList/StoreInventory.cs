@@ -1,9 +1,10 @@
-﻿
+﻿using static System.Console;
+
 namespace ShoppingList
 {
     internal class StoreInventory
     {
-        public static Dictionary<string, decimal> storeInventory = new Dictionary<string, decimal>()
+        public static Dictionary<string, decimal> storeInventory = new()
             {
                 {"Milk", 1.50m},
                 {"Eggs", 1.25m},
@@ -15,20 +16,18 @@ namespace ShoppingList
                 {"Bananas", 1.00m},
                 {"Onions", 3.75m},
                 {"Donuts", 0.75m},
-                {"Grapes", 1.99m}
+                {"Grapes", 1.99m},
+                {"Oranges", 4.99m}
             };
 
         public static void PrintStoreInventory()
         {
-            Console.Clear();
+            Clear();
             int itemNumber = 1;
-            Console.WriteLine("Welcome to Chirpus Market!");
-            Console.WriteLine("    Item      Price");
-            Console.WriteLine("=====================");
-            foreach(var kvp in storeInventory)
-            {
-                Console.WriteLine($"{itemNumber++, -2}: {kvp.Key,-10} {kvp.Value}");
-            }
+            WriteLine("Welcome to Chirpus Market!");
+            WriteLine("    Item      Price");
+            WriteLine("=====================");
+            storeInventory.ToList().ForEach(i => WriteLine($"{itemNumber++,-2}: {i.Key,-12}{i.Value}"));
         }
     }
 }
