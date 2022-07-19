@@ -11,7 +11,7 @@ namespace ShoppingList
         public ShoppingCart(string item, decimal price)
         {
             this.item = item;
-            this.price = price;
+            this.price = price; 
         }
 
         public string GetItem { get { return item; } }
