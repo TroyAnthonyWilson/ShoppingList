@@ -16,17 +16,19 @@ namespace ShoppingList
                 {"Bananas", 1.00m},
                 {"Onions", 3.75m},
                 {"Donuts", 0.75m},
+                {"Grapes", 1.99m}
             };
 
         public static void PrintStoreInventory()
         {
             Console.Clear();
             int itemNumber = 1;
-            Console.WriteLine("Store Inventory\n");
+            Console.WriteLine("Welcome to Chirpus Market!");
+            Console.WriteLine("    Item      Price");
+            Console.WriteLine("=====================");
             foreach(var kvp in storeInventory)
             {
-                Console.WriteLine($"{itemNumber}: {kvp.Key,-10} {kvp.Value}");
-                itemNumber++;
+                Console.WriteLine($"{itemNumber++, -2}: {kvp.Key,-10} {kvp.Value}");
             }
             Console.Write("\nPlease select an item to add to your cart: ");
         }
