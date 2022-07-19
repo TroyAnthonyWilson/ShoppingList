@@ -4,73 +4,32 @@ namespace ShoppingList
 {
     internal class ShoppingCart
     {
-        public static List<string> shoppingCart = new List<string>();
+        public static List<ShoppingCart> shoppingCart = new List<ShoppingCart>();
+        private string item;
+        private decimal price;
 
-
-        public static decimal printShoppingCart()
+        public ShoppingCart(string item, decimal price)
         {
-            int itemNumber = 1;
+            this.item = item;
+            this.price = price;
+        }
+
+        public string GetItem { get { return item; } }
+        public decimal GetPrice { get { return price; } }
+
+        public static decimal PrintShoppingCart()
+        {
             decimal total = 0;
-            decimal mostExpensive = 0;
-            decimal leastExpensive = 1000;
+            int itemNumber = 1;
             Console.Clear();
             Console.WriteLine("Shopping cart\n");
 
-            List<string> shoppingCartList = shoppingCart.ToList();
+            shoppingCart.OrderBy(x => x.GetPrice)
+                .ToList()
+                .ForEach(i => Console.WriteLine($"{itemNumber++,-2}: {i.GetItem,-12}{i.GetPrice}"));
 
-            foreach(var item in shoppingCartList)
-            {
-                if(storeInventory[item] > mostExpensive)
-                {
-                    mostExpensive = storeInventory[item];
-                }
-                if(storeInventory[item] < leastExpensive)
-                {
-                    leastExpensive = storeInventory[item];
-                }
-            }
-
-            do
-            {
-                decimal nextToPrint = 1000;
-                foreach(var item in shoppingCartList)
-                {
-                    if(storeInventory[item] < nextToPrint)
-                    {
-                        nextToPrint = storeInventory[item];
-                    }
-                }
-                foreach(var item in shoppingCart)
-                {
-                    bool nextLine = false;
-                    foreach(var kvp in storeInventory)
-                    {
-                        if(storeInventory[item] == nextToPrint && storeInventory[item] == kvp.Value)
-                        {
-                            Console.Write($"{itemNumber, -2}: {kvp.Key,-12} {kvp.Value}");
-                            total += kvp.Value;
-                            shoppingCartList.Remove(item);
-                            itemNumber++;
-                            nextLine = true;
-                            break;
-                        }
-                    }
-
-                    if(nextLine)
-                    {
-                        if(storeInventory[item] == mostExpensive)
-                        {
-                            Console.Write("   Most expensive item");
-                        }
-                        else if(storeInventory[item] == leastExpensive)
-                        {
-                            Console.Write("   Least expensive item");
-                        }
-                        Console.WriteLine();
-                    }
-                } 
-            } while(shoppingCartList.Count > 0);
-            Console.WriteLine($"\nCart total : {total}");
+            total = shoppingCart.Sum(item => item.GetPrice);
+            Console.WriteLine($"\nCart total : {total}\n");
             return total;
         }
     }

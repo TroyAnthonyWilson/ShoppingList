@@ -7,28 +7,40 @@ namespace ShoppingList
     {
         static void Main()
         {
-            bool addMoreItems = true;
-            string[] no = { "n" , "no"};
+
+            string[] no = { "n", "no", "exit", "e", "checkout" };
+            string[] someKeys = { "B", "A" };
             do
             {
                 PrintStoreInventory();
 
                 string add = Console.ReadLine();
 
-                if(storeInventory.ContainsKey(add))
+                if(storeInventory.Keys.Where(key => key.StartsWith(add)).Any())
                 {
-                    foreach(var kvp in storeInventory)
+                    string[] position = storeInventory.Keys.Where(key => key.StartsWith(add)).ToArray();
+
+                    if(position.Length == 1)
                     {
-                        if(add == kvp.Key)
+                        foreach(var kvp in storeInventory)
                         {
-                            shoppingCart.Add(kvp.Key);                       
-                            break;
+                            if(position[0] == kvp.Key)
+                            {
+                                shoppingCart.Add(new ShoppingCart(kvp.Key, kvp.Value));
+                                break;
+                            }
                         }
                     }
+                    else
+                    {
+                        Console.WriteLine("I couldn't find what you wanted");
+                        continue;
+                    }
                 }
-                else if(int.TryParse(add, out int index) && index -1  < storeInventory.Count)
+                else if(int.TryParse(add, out int index) && index - 1 < storeInventory.Count)
                 {
-                    shoppingCart.Add(storeInventory.ElementAt(index - 1).Key);
+                    shoppingCart.Add(new ShoppingCart(storeInventory.ElementAt(index - 1).Key,
+                        storeInventory.ElementAt(index - 1).Value));
                 }
                 else
                 {
@@ -37,16 +49,14 @@ namespace ShoppingList
                     Console.ReadKey();
                     continue;
                 }
-                printShoppingCart();
-                Console.Write("Press any key to add more items or NO to exit");
-                if(no.Contains(Console.ReadLine().ToLower().Trim()))
-                {
-                    addMoreItems = false;
-                }
-            } while(addMoreItems);
 
-            decimal total = printShoppingCart();
-            Console.WriteLine($"Your total for today comes to {total}");
+                PrintShoppingCart();
+
+                Console.Write("Press any key to add more items or NO to checkout: ");
+
+            } while(!no.Contains(Console.ReadLine().ToLower().Trim()));
+
+            Console.WriteLine($"Your total for today comes to {PrintShoppingCart()}");
         }
     }
 }
