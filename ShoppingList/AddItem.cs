@@ -32,7 +32,7 @@ namespace ShoppingList
                     return true;
                 }
             }
-            else if(int.TryParse(add, out int index) && --index < storeInventory.Count)
+            else if(int.TryParse(add, out int index) && --index < storeInventory.Count && index >= 0)
             {
                 shoppingCart.Add(new ShoppingCart(storeInventory.ElementAt(index).Key,
                     storeInventory.ElementAt(index).Value));
