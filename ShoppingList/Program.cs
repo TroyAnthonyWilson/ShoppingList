@@ -11,7 +11,7 @@ namespace ShoppingList
         {
             bool addMore = true;
             decimal total = 0;
-            string[] no = { "n", "no", "exit", "e", "checkout" };
+            string[] no = { "no", "exit", "checkout", "pay", };
   
             do
             {
@@ -19,9 +19,9 @@ namespace ShoppingList
                 if(AddItemToCart()) continue;
                 total = PrintShoppingCart();
 
-                Write("Press any key to add more items or NO to checkout: ");
-
-                if(no.Contains(ReadLine().ToLower().Trim()))
+                Write("Press any key to add more items or Pay to checkout: ");
+                string addToCartAgain = ReadLine().ToLower().Trim();
+                if(no.Where(n => n.StartsWith(addToCartAgain)).Any())
                 {
                     addMore = false;
                 }
