@@ -10,25 +10,26 @@ namespace ShoppingList
         static void Main()
         {
             bool addMore = true;
-            decimal total = 0;
             string[] no = { "no", "exit", "checkout", "pay", };
   
             do
             {
                 PrintStoreInventory();
                 if(AddItemToCart()) continue;
-                total = PrintShoppingCart();
+                PrintShoppingCart("Shopping cart");
 
                 Write("Press any key to add more items or Pay to checkout: ");
                 string addToCartAgain = ReadLine().ToLower().Trim();
-                if(no.Where(n => n.StartsWith(addToCartAgain)).Any())
+                if(no.Where(n => n.StartsWith(addToCartAgain)).Any() && addToCartAgain != "")
                 {
                     addMore = false;
                 }
 
             } while(addMore);
 
-            WriteLine($"Your total for today comes to {total}");
+            Clear();
+            decimal total = PrintShoppingCart("Receipt");
+            WriteLine($"Your total today comes to {total}");
         }
     }
 }

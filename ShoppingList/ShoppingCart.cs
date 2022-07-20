@@ -18,12 +18,12 @@ namespace ShoppingList
         public string GetItem { get { return item; } }
         public decimal GetPrice { get { return price; } }
 
-        public static decimal PrintShoppingCart()
+        public static decimal PrintShoppingCart(string desc)
         {
             decimal total = 0;
             int itemNumber = 1;
             Clear();
-            WriteLine("Shopping cart");
+            WriteLine(desc);
             WriteLine("==================\n");
 
             shoppingCart.OrderBy(x => x.GetPrice).ToList()
@@ -31,7 +31,7 @@ namespace ShoppingList
 
             total = shoppingCart.Sum(item => item.GetPrice);
             WriteLine("\n=======================");
-            WriteLine($"Cart total : {total}\n");
+            WriteLine($"{desc} total : {total}\n");
             return total;
         }
     }
